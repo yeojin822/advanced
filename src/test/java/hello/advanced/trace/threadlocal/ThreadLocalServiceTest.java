@@ -1,11 +1,12 @@
-package hello.advanced.trace.threadlocal.code;
+package hello.advanced.trace.threadlocal;
 
+import hello.advanced.trace.threadlocal.code.ThreadLocalService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class FieldServiceTest {
-    private FieldService fieldService = new FieldService();
+public class ThreadLocalServiceTest {
+    private ThreadLocalService threadLocalService = new ThreadLocalService();
 
     @Test
     void field() {
@@ -19,12 +20,8 @@ public class FieldServiceTest {
 //        }
         // 위 코드를 람다로 표현
 
-        Runnable userA = () -> {
-            fieldService.logic("userA");
-        };
-        Runnable userB = () -> {
-            fieldService.logic("userB");
-        };
+        Runnable userA = () -> threadLocalService.logic("userA");
+        Runnable userB = () -> threadLocalService.logic("userB");
 
         Thread threadA = new Thread(userA);
         threadA.setName("thread-A");
